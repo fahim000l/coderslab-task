@@ -8,6 +8,7 @@ interface props {
   placeholder?: string;
   onChange?: (e: any) => void;
   className?: string;
+  value?: string;
 }
 
 const CustomInput = ({
@@ -17,6 +18,7 @@ const CustomInput = ({
   placeholder,
   onChange,
   className,
+  value,
 }: props) => {
   return (
     <div
@@ -29,6 +31,7 @@ const CustomInput = ({
         type={type}
         placeholder={placeholder}
         onChange={onChange}
+        value={value}
       />
       {icon}
     </div>

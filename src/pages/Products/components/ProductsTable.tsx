@@ -1,12 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CustomButton from "../../../tools/CustomButton";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { rootStateType } from "../../../app/store";
 import { productType } from "../../../../utils/typs";
 import ProductsTableRow from "./ProductsTableRow";
+import { useGetProductsQuery } from "../../../features/products/productsApi";
+import { getProducts } from "../../../features/products/productsSlice";
 
 const ProductsTable = () => {
-  const { products } = useSelector((state: rootStateType) => state.products);
+  const { products, per_page, currentPage, search } = useSelector(
+    (state: rootStateType) => state.products
+  );
+  const dispatch = useDispatch();
+
+  const { data } = useGetProductsQuery({
+    page: currentPage,
+    per_page,
+    search,
+  });
+
+  useEffect(() => {
+    console.log(data);
+    console.log(data?.data?.data);
+    dispatch(
+      getProducts({
+        currentPage: data?.data?.current_page,
+        products: data?.data?.data,
+      })
+    );
+  }, [data, currentPage]);
 
   return (
     <div className="h-[500px] overflow-y-scroll">
@@ -57,8 +79,8 @@ const ProductsTable = () => {
           </tr>
         </thead>
         <tbody>
-          {products?.map((product: productType) => (
-            <ProductsTableRow product={product} key={product?.id} />
+          {products?.map((product: productType, i: number) => (
+            <ProductsTableRow index={i} product={product} key={product?.id} />
           ))}
         </tbody>
       </table>

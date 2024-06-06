@@ -6,6 +6,7 @@ interface stateType {
   currentPage: number;
   search: string;
   per_page: number;
+  editingProduct: productType | null;
 }
 
 const initialState: stateType = {
@@ -13,6 +14,7 @@ const initialState: stateType = {
   currentPage: 1,
   search: "",
   per_page: 10,
+  editingProduct: null,
 };
 
 const productsSlice = createSlice({
@@ -30,10 +32,17 @@ const productsSlice = createSlice({
     setCurrentPage: (state, { payload }) => {
       state.currentPage = payload;
     },
+    setEditingProduct: (state, { payload }) => {
+      state.editingProduct = payload;
+    },
   },
 });
 
-export const { getProducts, searchProducts, setCurrentPage } =
-  productsSlice.actions;
+export const {
+  getProducts,
+  searchProducts,
+  setCurrentPage,
+  setEditingProduct,
+} = productsSlice.actions;
 
 export default productsSlice.reducer;

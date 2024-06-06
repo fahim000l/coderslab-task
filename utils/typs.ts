@@ -5,14 +5,14 @@ export interface varientType {
 }
 
 export interface productType {
-  id: number;
+  id?: number;
   name: string;
   brand: string;
   type: string;
-  orizin: string;
-  created_at: string;
-  updated_at: string;
-  variants: varientType[];
+  origin: string;
+  created_at?: string;
+  updated_at?: string;
+  variants?: varientType[];
 }
 
 export interface orderDatailsType {

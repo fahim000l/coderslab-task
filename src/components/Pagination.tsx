@@ -15,7 +15,18 @@ const Pagination = () => {
       <button
         onClick={() => {
           if (currentPage !== 1) {
-            dispatch(setCurrentPage(currentPage - 1));
+            if (currentPage === pages[0]) {
+              setPages((pages) => {
+                let copy = pages;
+                console.log(copy);
+                copy = copy?.map((page) => page - 1);
+                console.log(copy);
+                return copy;
+              });
+              dispatch(setCurrentPage(currentPage - 1));
+            } else {
+              dispatch(setCurrentPage(currentPage - 1));
+            }
           }
         }}
         className="bg-[#83cbeb] text-white p-2 rounded-sm hover:bg-[steelblue]"
@@ -24,6 +35,7 @@ const Pagination = () => {
       </button>
       {pages?.map((number) => (
         <button
+          key={number}
           onClick={() => dispatch(setCurrentPage(number))}
           className={`${
             currentPage === number ? "bg-[steelblue]" : "bg-[#83cbeb]"
@@ -36,7 +48,18 @@ const Pagination = () => {
         onClick={() => {
           //   setPages([4, 5, 6, 7]);
           //   if()
-          dispatch(setCurrentPage(currentPage + 1));
+          if (currentPage === pages[pages?.length - 1]) {
+            setPages((pages) => {
+              let copy = pages;
+              console.log(copy);
+              copy = copy?.map((page) => page + 1);
+              console.log(copy);
+              return copy;
+            });
+            dispatch(setCurrentPage(currentPage + 1));
+          } else {
+            dispatch(setCurrentPage(currentPage + 1));
+          }
         }}
         className="bg-[#83cbeb] text-white p-2 rounded-sm hover:bg-[steelblue]"
       >

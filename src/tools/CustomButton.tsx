@@ -1,8 +1,8 @@
-import React from "react";
+import React, { FormEvent } from "react";
 
 interface props {
   children: React.ReactNode;
-  onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  onClick?: (() => void) | ((e: any) => void);
   className?: string;
 }
 
