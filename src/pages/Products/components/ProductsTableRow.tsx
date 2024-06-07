@@ -11,6 +11,7 @@ import {
 } from "../../../features/products/productsSlice";
 import TrushIcon from "../../../tools/Icons/TrushIcon";
 import EditIcon from "../../../tools/Icons/EditIcon";
+import EyeIcon from "../../../tools/Icons/EyeIcon";
 
 interface props {
   product: productType;
@@ -74,8 +75,10 @@ const ProductsTableRow = ({ product, index }: props) => {
             tabIndex={0}
             className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 gap-2"
           >
-            <li>
-              <CustomButton theme="primary">View</CustomButton>
+            <li onClick={() => navigate(`/view-product/${id}`)}>
+              <CustomButton icon={<EyeIcon />} theme="primary">
+                View
+              </CustomButton>
             </li>
             <li
               onClick={() => {

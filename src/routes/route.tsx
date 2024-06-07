@@ -3,6 +3,7 @@ import Main from "../layout/Main";
 import Products from "../pages/Products/Products";
 import Orders from "../pages/Orders/Orders";
 import CreateProduct from "../pages/CreateProduct/CreateProduct";
+import ViewProduct from "../pages/ViewProduct/ViewProduct";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "/edit-product/:id",
         element: <CreateProduct />,
+      },
+      {
+        path: "/view-product/:id",
+        element: <ViewProduct />,
       },
     ],
   },
