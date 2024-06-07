@@ -10,13 +10,15 @@ import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { setDeletingProductId } from "../../features/products/productsSlice";
 import useTitle from "../../hooks/useTitle";
+import { useNavigate } from "react-router-dom";
 
 const Products = () => {
   useTitle("Products List");
   const { deletingProductId } = useSelector(
     (state: rootStateType) => state?.products
   );
-
+  const { pageTitle } = useSelector((state: rootStateType) => state?.main);
+  const navigate = useNavigate();
   const [deleteProduct, deleteProductResult] = useDeleteProductMutation();
   const dispatch = useDispatch();
 
@@ -35,7 +37,21 @@ const Products = () => {
         <ProductsHeader />
         <ProductsTable />
       </div>
-      <Pagination />
+      <div
+        className={`flex items-center ${
+          pageTitle?.includes("|") && "justify-between"
+        }`}
+      >
+        <Pagination />
+        {pageTitle?.includes("|") && (
+          <div className="ml-auto flex items-center gap-5">
+            <CustomButton theme="error" onClick={() => navigate("/orders")}>
+              Cancel
+            </CustomButton>
+            <CustomButton theme="primary">Next</CustomButton>
+          </div>
+        )}
+      </div>
       {deletingProductId && (
         <Modal
           title={`Confirmation to delete product Id: ${deletingProductId}`}

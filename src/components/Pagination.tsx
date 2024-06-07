@@ -8,10 +8,15 @@ import { setCurrentPage } from "../features/products/productsSlice";
 const Pagination = () => {
   const [pages, setPages] = useState<number[]>([1, 2, 3, 4]);
   const { currentPage } = useSelector((state: rootStateType) => state.products);
+  const { pageTitle } = useSelector((state: rootStateType) => state.main);
   const dispatch = useDispatch();
 
   return (
-    <div className="flex items-center gap-2 mx-auto">
+    <div
+      className={`flex items-center gap-2 ${
+        !pageTitle?.includes("|") && "mx-auto"
+      }`}
+    >
       <button
         onClick={() => {
           if (currentPage !== 1) {

@@ -13,6 +13,7 @@ import TrushIcon from "../../../tools/Icons/TrushIcon";
 import EditIcon from "../../../tools/Icons/EditIcon";
 import EyeIcon from "../../../tools/Icons/EyeIcon";
 import { rootStateType } from "../../../app/store";
+import { selectProduct } from "../../../features/orders/ordersSlice";
 
 interface props {
   product: productType;
@@ -21,6 +22,9 @@ interface props {
 
 const ProductsTableRow = ({ product, index }: props) => {
   const { pageTitle } = useSelector((state: rootStateType) => state.main);
+  const { selectedProducts } = useSelector(
+    (state: rootStateType) => state.orders
+  );
   const { brand, name, type, created_at = "", id = "" } = product;
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -62,7 +66,13 @@ const ProductsTableRow = ({ product, index }: props) => {
             index % 2 === 0 ? "bg-[#ccdfef]" : "bg-[#e7f0f7]"
           } py-2 border border-solid border-[white] text-[12px]`}
         >
-          <input type="checkbox" defaultChecked className="checkbox" />
+          <input
+            onClick={() => dispatch(selectProduct(id as number))}
+            checked={(selectedProducts as number[])?.includes(id as number)}
+            type="checkbox"
+            defaultChecked
+            className="checkbox"
+          />
         </td>
       ) : (
         <>

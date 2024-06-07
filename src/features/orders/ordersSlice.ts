@@ -6,6 +6,7 @@ interface initialStateType {
   currentPage: number;
   search: string;
   per_page: number;
+  selectedProducts: number[] | never[];
 }
 
 const initialState: initialStateType = {
@@ -13,6 +14,7 @@ const initialState: initialStateType = {
   currentPage: 1,
   search: "",
   per_page: 10,
+  selectedProducts: [],
 };
 
 const orderSlice = createSlice({
@@ -26,9 +28,18 @@ const orderSlice = createSlice({
     searchOrder: (state, { payload }) => {
       state.search = payload;
     },
+    selectProduct: (state, { payload }: { payload: number }) => {
+      if ((state?.selectedProducts as number[])?.includes(payload)) {
+        state.selectedProducts = state.selectedProducts.filter(
+          (id) => id !== payload
+        );
+      } else {
+        (state.selectedProducts as number[]).push(payload);
+      }
+    },
   },
 });
 
-export const { getOrders, searchOrder } = orderSlice.actions;
+export const { getOrders, searchOrder, selectProduct } = orderSlice.actions;
 
 export default orderSlice.reducer;
