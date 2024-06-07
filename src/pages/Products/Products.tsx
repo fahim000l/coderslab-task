@@ -9,8 +9,10 @@ import { useDeleteProductMutation } from "../../features/products/productsApi";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { setDeletingProductId } from "../../features/products/productsSlice";
+import useTitle from "../../hooks/useTitle";
 
 const Products = () => {
+  useTitle("Products List");
   const { deletingProductId } = useSelector(
     (state: rootStateType) => state?.products
   );

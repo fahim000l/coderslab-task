@@ -21,9 +21,12 @@ export interface orderDatailsType {
 }
 
 export interface orderType {
+  id?: number;
   name: string;
   email: string;
   address: string;
   total_quantity: number;
+  created_at?: string;
+  updated_at?: string;
   details: orderDatailsType[];
 }

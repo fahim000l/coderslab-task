@@ -11,6 +11,7 @@ const ProductsTable = () => {
   const { products, per_page, currentPage, search } = useSelector(
     (state: rootStateType) => state.products
   );
+  const { pageTitle } = useSelector((state: rootStateType) => state.main);
   const dispatch = useDispatch();
 
   const { data } = useGetProductsQuery({
@@ -64,18 +65,29 @@ const ProductsTable = () => {
             >
               Type
             </th>
-            <th
-              scope="col"
-              className="bg-[#0f9ed5] text-center text-white py-2 border border-solid border-[white] text-[14px]"
-            >
-              Created At
-            </th>
-            <th
-              scope="col"
-              className="bg-[#0f9ed5] text-center text-white py-2 border border-solid border-[white] text-[14px]"
-            >
-              Actions
-            </th>
+            {pageTitle?.includes("|") ? (
+              <th
+                scope="col"
+                className="bg-[#0f9ed5] text-center text-white py-2 border border-solid border-[white] text-[14px]"
+              >
+                Select{" "}
+              </th>
+            ) : (
+              <>
+                <th
+                  scope="col"
+                  className="bg-[#0f9ed5] text-center text-white py-2 border border-solid border-[white] text-[14px]"
+                >
+                  Created At
+                </th>
+                <th
+                  scope="col"
+                  className="bg-[#0f9ed5] text-center text-white py-2 border border-solid border-[white] text-[14px]"
+                >
+                  Actions
+                </th>
+              </>
+            )}
           </tr>
         </thead>
         <tbody>

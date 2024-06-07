@@ -4,6 +4,7 @@ import Products from "../pages/Products/Products";
 import Orders from "../pages/Orders/Orders";
 import CreateProduct from "../pages/CreateProduct/CreateProduct";
 import ViewProduct from "../pages/ViewProduct/ViewProduct";
+import SelectProduct from "../pages/CreateOrder/SelectProduct/SelectProduct";
 
 const router = createBrowserRouter([
   {
@@ -13,10 +14,6 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Products />,
-      },
-      {
-        path: "/orders",
-        element: <Orders />,
       },
       {
         path: "/create-product",
@@ -29,6 +26,14 @@ const router = createBrowserRouter([
       {
         path: "/view-product/:id",
         element: <ViewProduct />,
+      },
+      {
+        path: "/orders",
+        element: <Orders />,
+      },
+      {
+        path: "/create-order/select-product",
+        element: <SelectProduct />,
       },
     ],
   },

@@ -3,8 +3,11 @@ import ViewVarientRow from "./components/ViewVarientRow";
 import { useParams } from "react-router-dom";
 import { useGetProductByIdQuery } from "../../features/products/productsApi";
 import { productType } from "../../../utils/typs";
+import useTitle from "../../hooks/useTitle";
 
 const ViewProduct = () => {
+  useTitle("View Product");
+
   const { id } = useParams();
 
   const { data } = useGetProductByIdQuery(id);

@@ -12,12 +12,14 @@ import {
 import { useSelector } from "react-redux";
 import { rootStateType } from "../../app/store";
 import toast from "react-hot-toast";
+import useTitle from "../../hooks/useTitle";
 
 const CreateProduct = () => {
   const navigate = useNavigate();
   const [storeProduct, productStoreResult] = useCreateProductMutation();
   const [editProduct, editProductResult] = useEditProductMutation();
   const { id } = useParams();
+  useTitle(id ? "Update Product" : "Create Product");
   const { editingProduct } = useSelector(
     (state: rootStateType) => state.products
   );
