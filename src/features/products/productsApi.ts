@@ -20,6 +20,10 @@ export const productsAPi = apiSlice.injectEndpoints({
       query: (values) => ({
         url: "/api/products",
         method: "POST",
+        headers: {
+          "content-type": "application/json",
+          Accept: "application/json",
+        },
         body: values,
       }),
     }),
@@ -27,6 +31,23 @@ export const productsAPi = apiSlice.injectEndpoints({
       query: (id) => ({
         url: `/api/products/${id}`,
         params: id,
+      }),
+    }),
+    editProduct: builder.mutation({
+      query: (values) => ({
+        url: `/api/products/${values?.id}`,
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+          Accept: "application/json",
+        },
+        body: values?.product,
+      }),
+    }),
+    deleteProduct: builder.mutation({
+      query: (productId) => ({
+        url: `/api/products/${productId}`,
+        method: "DELETE",
       }),
     }),
   }),
@@ -37,4 +58,6 @@ export const {
   useGetProductsQuery,
   useCreateProductMutation,
   useGetProductByIdQuery,
+  useEditProductMutation,
+  useDeleteProductMutation,
 } = productsAPi;

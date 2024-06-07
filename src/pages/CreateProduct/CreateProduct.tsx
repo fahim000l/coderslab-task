@@ -7,36 +7,56 @@ import { productType, varientType } from "../../../utils/typs";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   useCreateProductMutation,
-  useGetProductByIdQuery,
+  useEditProductMutation,
 } from "../../features/products/productsApi";
-import { useDispatch, useSelector } from "react-redux";
-import { setEditingProduct } from "../../features/products/productsSlice";
+import { useSelector } from "react-redux";
 import { rootStateType } from "../../app/store";
+import toast from "react-hot-toast";
 
 const CreateProduct = () => {
   const navigate = useNavigate();
   const [storeProduct, productStoreResult] = useCreateProductMutation();
-  const dispatch = useDispatch();
+  const [editProduct, editProductResult] = useEditProductMutation();
   const { id } = useParams();
   const { editingProduct } = useSelector(
     (state: rootStateType) => state.products
   );
 
-  const { data } = useGetProductByIdQuery(id);
+  // const { data } = useGetProductByIdQuery(id);
+
+  // useEffect(() => {
+  //   console.log(data?.data);
+  //   if (data?.data?.id) {
+  //     dispatch(setEditingProduct(data?.data));
+  //   }
+  // }, [data]);
 
   useEffect(() => {
-    console.log(data?.data);
-    if (data?.data?.id) {
-      dispatch(setEditingProduct(data?.data));
+    console.log(editProductResult);
+
+    if (editProductResult.isSuccess) {
+      toast.success(editProductResult?.data?.message);
+      navigate("/");
     }
-  }, [data]);
+    if (editProductResult?.isError) {
+      toast.error(editProductResult?.error?.data?.message);
+    }
+  }, [editProductResult]);
 
   useEffect(() => {
     console.log(productStoreResult);
+
+    if (productStoreResult?.isSuccess) {
+      toast.success(productStoreResult?.data?.message);
+      navigate("/");
+    }
+    if (productStoreResult?.isError) {
+      toast.error(productStoreResult?.error?.data?.message);
+    }
   }, [productStoreResult]);
 
   const Formik = useFormik<productType>({
-    initialValues: {
+    initialValues: editingProduct || {
       name: "",
       brand: "",
       type: "",
@@ -66,21 +86,42 @@ const CreateProduct = () => {
     },
     onSubmit: (values) => {
       console.log(values);
-      storeProduct(values);
+
+      if (id) {
+        const parser = {
+          id,
+          product: values,
+        };
+        editProduct(parser);
+
+        // fetch(`https://reactjr.coderslab.online/api/products/${parser?.id}`, {
+        //   method: "PUT",
+        //   headers: {
+        //     "content-type": "application/json",
+        //     Accept: "application/json",
+        //   },
+        //   body: JSON.stringify(parser?.product),
+        // })
+        //   .then((res) => res.json())
+        //   .then((data) => {
+        //     console.log(data);
+        //   })
+        //   .catch((e) => {
+        //     console.log(e);
+        //   });
+      } else {
+        storeProduct(values);
+      }
     },
   });
 
-
-  useEffect(() => {
-    if(editingProduct?.id){
-      Formik.setFieldValue("name",editingProduct?.name)
-      Formik.setFieldValue("brand",editingProduct?.brand)
-      Formik.setFieldValue("brand",editingProduct?. )
-    }
-  })
-
-
-
+  // useEffect(() => {
+  //   if(editingProduct?.id){
+  //     Formik.setFieldValue("name",editingProduct?.name)
+  //     Formik.setFieldValue("brand",editingProduct?.brand)
+  //     Formik.setFieldValue("brand",editingProduct?. )
+  //   }
+  // })
 
   return (
     <div className="flex flex-col gap-10">
@@ -114,6 +155,7 @@ const CreateProduct = () => {
           ))}
         </div>
         <CustomButton
+          theme="primary"
           onClick={() =>
             Formik.setFieldValue("variants", [
               ...(Formik.values.variants as varientType[]),
@@ -130,8 +172,12 @@ const CreateProduct = () => {
         </CustomButton>
       </div>
       <div className="ml-auto flex items-center gap-5">
-        <CustomButton onClick={() => navigate("/")}>Cancel</CustomButton>
-        <CustomButton onClick={Formik.handleSubmit}>Submit</CustomButton>
+        <CustomButton theme="error" onClick={() => navigate("/")}>
+          Cancel
+        </CustomButton>
+        <CustomButton theme="primary" onClick={Formik.handleSubmit}>
+          Submit
+        </CustomButton>
       </div>
     </div>
   );

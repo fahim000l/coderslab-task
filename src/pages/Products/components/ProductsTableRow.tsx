@@ -3,6 +3,14 @@ import CustomButton from "../../../tools/CustomButton";
 import { productType } from "../../../../utils/typs";
 import formatDate from "../../../../utils/format";
 import { useNavigate } from "react-router-dom";
+import { useGetProductByIdQuery } from "../../../features/products/productsApi";
+import { useDispatch } from "react-redux";
+import {
+  setDeletingProductId,
+  setEditingProduct,
+} from "../../../features/products/productsSlice";
+import TrushIcon from "../../../tools/Icons/TrushIcon";
+import EditIcon from "../../../tools/Icons/EditIcon";
 
 interface props {
   product: productType;
@@ -10,8 +18,10 @@ interface props {
 }
 
 const ProductsTableRow = ({ product, index }: props) => {
-  const { brand, name, type, origin, created_at = "", id = "" } = product;
+  const { brand, name, type, created_at = "", id = "" } = product;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { data } = useGetProductByIdQuery(id);
 
   return (
     <tr>
@@ -59,19 +69,36 @@ const ProductsTableRow = ({ product, index }: props) => {
           {/* <div tabIndex={0} role="button" className="btn m-1">
           Click
         </div> */}
-          <CustomButton>Click</CustomButton>
+          <CustomButton theme="primary">Manage</CustomButton>
           <ul
             tabIndex={0}
             className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 gap-2"
           >
             <li>
-              <CustomButton>View</CustomButton>
+              <CustomButton theme="primary">View</CustomButton>
             </li>
-            <li onClick={() => navigate(`/edit-product/${id}`)}>
-              <CustomButton>Edit</CustomButton>
+            <li
+              onClick={() => {
+                if (data?.data?.id) {
+                  dispatch(setEditingProduct(data?.data));
+                  navigate(`/edit-product/${id}`);
+                }
+              }}
+            >
+              <CustomButton icon={<EditIcon />} theme="primary">
+                Edit
+              </CustomButton>
             </li>
             <li>
-              <CustomButton>Delete</CustomButton>
+              <CustomButton
+                icon={<TrushIcon />}
+                theme="error"
+                isModal={true}
+                onClick={() => dispatch(setDeletingProductId(id))}
+                htmlFor="customModal"
+              >
+                Delete
+              </CustomButton>
             </li>
           </ul>
         </div>
