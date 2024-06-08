@@ -58,6 +58,12 @@ const ViewOrderDetailsTable = ({ order }: props) => {
               scope="col"
               className="bg-[#0f9ed5] text-center text-white py-2 border border-solid border-[white] text-[14px]"
             >
+              Quantity
+            </th>
+            <th
+              scope="col"
+              className="bg-[#0f9ed5] text-center text-white py-2 border border-solid border-[white] text-[14px]"
+            >
               Variants
             </th>
           </tr>

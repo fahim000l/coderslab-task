@@ -61,6 +61,14 @@ const VIewVariantsTableRow = ({ index, variant }: props) => {
         {/* {id} */}
         {varientRow?.size}
       </td>
+      <td
+        className={`text-center ${
+          index % 2 === 0 ? "bg-[#ccdfef]" : "bg-[#e7f0f7]"
+        } py-2 border border-solid border-[white] text-[12px]`}
+      >
+        {/* {id} */}
+        {variant?.quantity}
+      </td>
     </tr>
   );
 };

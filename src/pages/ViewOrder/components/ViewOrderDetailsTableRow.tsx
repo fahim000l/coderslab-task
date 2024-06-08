@@ -39,6 +39,11 @@ const ViewOrderDetailsTableRow = ({ index, details, productId }: params) => {
     (detail) => detail.variant?.product_id === product?.id
   );
 
+  const totalQuantity = variants?.reduce(
+    (accumulator, currentValue) => accumulator + currentValue?.quantity,
+    0
+  );
+
   console.log(variants);
 
   return (
@@ -74,6 +79,14 @@ const ViewOrderDetailsTableRow = ({ index, details, productId }: params) => {
       >
         {/* {id} */}
         {product?.type}
+      </td>
+      <td
+        className={`text-center ${
+          index % 2 === 0 ? "bg-[#ccdfef]" : "bg-[#e7f0f7]"
+        } py-2 border border-solid border-[white] text-[12px]`}
+      >
+        {/* {id} */}
+        {totalQuantity}
       </td>
       <td
         className={`text-center ${
