@@ -12,6 +12,7 @@ interface initialStateType {
   selectedVariants:
     | { variant_id: number; quantity: number; check: boolean }[]
     | never[];
+  totalQuantity: number;
 }
 
 const initialState: initialStateType = {
@@ -22,6 +23,7 @@ const initialState: initialStateType = {
   selectedProducts: [],
   choosedProduct: null,
   selectedVariants: [],
+  totalQuantity: 0,
 };
 
 const orderSlice = createSlice({
@@ -100,6 +102,23 @@ const orderSlice = createSlice({
         (variant) => variant?.variant_id === payload?.variant_id
       )?.check;
     },
+    calculateTotalQuantity: (state) => {
+      state.selectedVariants.forEach((variant) => {
+        if (variant.check) {
+          state.totalQuantity += variant.quantity;
+        }
+      });
+    },
+    removePendingVariants: (state) => {
+      console.log(state.selectedVariants);
+      state.selectedVariants = state.selectedVariants?.filter(
+        (variant) => variant?.check
+      );
+      console.log(state.selectedVariants);
+    },
+    resetTotalQuantity: (state) => {
+      state.totalQuantity = 0;
+    },
   },
 });
 
@@ -110,6 +129,9 @@ export const {
   chooseProduct,
   selectVariant,
   confirmVariant,
+  calculateTotalQuantity,
+  removePendingVariants,
+  resetTotalQuantity,
 } = orderSlice.actions;
 
 export default orderSlice.reducer;

@@ -15,7 +15,18 @@ export const ordersApi = apiSlice.injectEndpoints({
         url: `/api/orders?search=${search}&per_page=${per_page}&page=${page}`,
       }),
     }),
+    createOrder: builder.mutation({
+      query: (order) => ({
+        url: `/api/orders`,
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          Accept: "application/json",
+        },
+        body: order,
+      }),
+    }),
   }),
 });
 
-export const { useGetOrdersQuery } = ordersApi;
+export const { useGetOrdersQuery, useCreateOrderMutation } = ordersApi;

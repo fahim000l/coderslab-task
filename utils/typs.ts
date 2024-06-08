@@ -22,6 +22,7 @@ export interface productType {
 export interface orderDatailsType {
   variant_id: number;
   quantity: number;
+  check?: boolean;
 }
 
 export interface orderType {
