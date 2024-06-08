@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import ViewOrderDetailsTableRow from "./ViewOrderDetailsTableRow";
-import { orderDatailsType, orderType } from "../../../../utils/typs";
+import { orderType } from "../../../../utils/typs";
 import { useDispatch, useSelector } from "react-redux";
 import { setOrderdProducts } from "../../../features/orders/ordersSlice";
 import { rootStateType } from "../../../app/store";

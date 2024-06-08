@@ -1,5 +1,3 @@
-import React from "react";
-
 const BackIcon = ({ className }: { className?: string }) => {
   return (
     <svg

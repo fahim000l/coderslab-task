@@ -1,9 +1,5 @@
-import React, { useEffect, useState } from "react";
-import {
-  orderDatailsType,
-  productType,
-  varientType,
-} from "../../../../utils/typs";
+import { useEffect, useState } from "react";
+import { orderDatailsType, productType } from "../../../../utils/typs";
 import { useGetProductByIdQuery } from "../../../features/products/productsApi";
 import CustomButton from "../../../tools/CustomButton";
 import ContentModal from "../../../tools/modal/ContentModal";

@@ -1,4 +1,3 @@
-import React from "react";
 import CustomInput from "../../../tools/CustomInput";
 import CustomButton from "../../../tools/CustomButton";
 import { FormikProps } from "formik";

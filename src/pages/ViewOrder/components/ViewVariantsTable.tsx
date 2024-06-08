@@ -1,4 +1,3 @@
-import React from "react";
 import VIewVariantsTableRow from "./VIewVariantsTableRow";
 import {
   orderDatailsType,

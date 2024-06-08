@@ -1,14 +1,10 @@
-import React, { useEffect } from "react";
-import CustomButton from "../../../tools/CustomButton";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { rootStateType } from "../../../app/store";
-import { orderDatailsType, productType } from "../../../../utils/typs";
+import { productType } from "../../../../utils/typs";
 import ProductsTableRow from "./ProductsTableRow";
 import { useGetProductsQuery } from "../../../features/products/productsApi";
 import { getProducts } from "../../../features/products/productsSlice";
-import { useParams } from "react-router-dom";
-import { useGetOrderByIdQuery } from "../../../features/orders/ordersApi";
-import { chooseProduct } from "../../../features/orders/ordersSlice";
 
 const ProductsTable = () => {
   const { products, per_page, currentPage, search } = useSelector(

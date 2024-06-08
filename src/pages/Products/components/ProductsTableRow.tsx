@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
 import CustomButton from "../../../tools/CustomButton";
-import { orderDatailsType, productType } from "../../../../utils/typs";
+import { productType } from "../../../../utils/typs";
 import formatDate from "../../../../utils/format";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useGetProductByIdQuery } from "../../../features/products/productsApi";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -13,11 +12,7 @@ import TrushIcon from "../../../tools/Icons/TrushIcon";
 import EditIcon from "../../../tools/Icons/EditIcon";
 import EyeIcon from "../../../tools/Icons/EyeIcon";
 import { rootStateType } from "../../../app/store";
-import {
-  chooseProduct,
-  selectProduct,
-} from "../../../features/orders/ordersSlice";
-import { useGetOrderByIdQuery } from "../../../features/orders/ordersApi";
+import { selectProduct } from "../../../features/orders/ordersSlice";
 
 interface props {
   product: productType;

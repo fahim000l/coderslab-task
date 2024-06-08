@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import LeftArrowCap from "../tools/Icons/LeftArrowCap";
 import RightArrowCap from "../tools/Icons/RightArrowCap";
 import { useDispatch, useSelector } from "react-redux";

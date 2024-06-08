@@ -1,9 +1,7 @@
-import React from "react";
 import CustomButton from "../../../tools/CustomButton";
 import { useNavigate } from "react-router-dom";
 import EyeIcon from "../../../tools/Icons/EyeIcon";
 import { orderType } from "../../../../utils/typs";
-import EditIcon from "../../../tools/Icons/EditIcon";
 import TrushIcon from "../../../tools/Icons/TrushIcon";
 import formatDate from "../../../../utils/format";
 import { useDispatch } from "react-redux";

@@ -1,4 +1,3 @@
-import React from "react";
 import CustomButton from "../../../../tools/CustomButton";
 import { useDispatch, useSelector } from "react-redux";
 import { rootStateType } from "../../../../app/store";

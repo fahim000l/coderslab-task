@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useGetOrdersQuery } from "../../../features/orders/ordersApi";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrders } from "../../../features/orders/ordersSlice";

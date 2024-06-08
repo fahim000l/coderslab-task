@@ -1,9 +1,4 @@
-import React from "react";
-import {
-  orderDatailsType,
-  orderType,
-  varientType,
-} from "../../../../utils/typs";
+import { orderDatailsType } from "../../../../utils/typs";
 
 interface props {
   index: number;

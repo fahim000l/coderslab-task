@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ViewVarientRow from "./components/ViewVarientRow";
 import { useParams } from "react-router-dom";
 import { useGetProductByIdQuery } from "../../features/products/productsApi";
