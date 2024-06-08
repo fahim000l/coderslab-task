@@ -23,6 +23,7 @@ export interface orderDatailsType {
   variant_id: number;
   quantity: number;
   check?: boolean;
+  variant?: varientType;
 }
 
 export interface orderType {

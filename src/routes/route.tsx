@@ -7,6 +7,7 @@ import ViewProduct from "../pages/ViewProduct/ViewProduct";
 import SelectProduct from "../pages/CreateOrder/SelectProduct/SelectProduct";
 import SelectVariant from "../pages/CreateOrder/SelectVariant/SelectVariant";
 import OrderInfo from "../pages/CreateOrder/OrderInfo/OrderInfo";
+import ViewOrder from "../pages/ViewOrder/ViewOrder";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "/create-order/order-info",
         element: <OrderInfo />,
+      },
+      {
+        path: "/view-order/:id",
+        element: <ViewOrder />,
       },
     ],
   },

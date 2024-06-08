@@ -75,7 +75,7 @@ const OrderTableRow = ({ order, index }: props) => {
             tabIndex={0}
             className="dropdown-content rounded-sm border border-solid border-gray-500 bg-[#f1f1f1]  menu p-2 shadow  min-w-52 gap-2 z-[900]"
           >
-            <li onClick={() => navigate(`/view-product/${id}`)}>
+            <li onClick={() => navigate(`/view-order/${id}`)}>
               <CustomButton icon={<EyeIcon />} theme="primary">
                 View
               </CustomButton>

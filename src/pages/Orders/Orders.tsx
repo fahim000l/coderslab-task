@@ -1,4 +1,3 @@
-import React from "react";
 import OrdersHeader from "./components/OrdersHeader";
 import OrderTable from "./components/OrderTable";
 import useTitle from "../../hooks/useTitle";
