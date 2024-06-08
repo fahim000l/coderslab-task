@@ -119,6 +119,11 @@ const orderSlice = createSlice({
     resetTotalQuantity: (state) => {
       state.totalQuantity = 0;
     },
+    resetOrder: (state) => {
+      state.selectedProducts = [];
+      state.selectedVariants = [];
+      state.totalQuantity = 0;
+    },
   },
 });
 
@@ -132,6 +137,7 @@ export const {
   calculateTotalQuantity,
   removePendingVariants,
   resetTotalQuantity,
+  resetOrder,
 } = orderSlice.actions;
 
 export default orderSlice.reducer;

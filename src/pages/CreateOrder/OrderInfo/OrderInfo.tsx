@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useTitle from "../../../hooks/useTitle";
 import CustomInput from "../../../tools/CustomInput";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,8 +7,13 @@ import CustomButton from "../../../tools/CustomButton";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { orderType } from "../../../../utils/typs";
-import { resetTotalQuantity } from "../../../features/orders/ordersSlice";
+import {
+  resetOrder,
+  resetTotalQuantity,
+} from "../../../features/orders/ordersSlice";
 import { useCreateOrderMutation } from "../../../features/orders/ordersApi";
+import Modal from "../../../tools/modal/Modal";
+import toast from "react-hot-toast";
 
 const OrderInfo = () => {
   useTitle("Create Order | Order Info");
@@ -18,6 +23,15 @@ const OrderInfo = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [createOrder, createOrderResult] = useCreateOrderMutation();
+
+  useEffect(() => {
+    if (createOrderResult.isSuccess) {
+      Formik.resetForm();
+      toast.success("Order Created Successfully");
+      dispatch(resetOrder());
+      navigate("/orders");
+    }
+  }, [createOrderResult]);
 
   const Formik = useFormik<orderType>({
     initialValues: {
@@ -81,9 +95,33 @@ const OrderInfo = () => {
         >
           Back
         </CustomButton>
-        <CustomButton onClick={Formik.handleSubmit} theme="primary">
+        <CustomButton
+          isModal={true}
+          htmlFor="customModal"
+          // onClick={Formik.handleSubmit}
+          theme="primary"
+        >
           Submit
         </CustomButton>
+        {Formik.values.address && Formik.values.email && Formik.values.name && (
+          <Modal
+            title="Comfirmation to create order"
+            message="Are you sure, you want to create this order"
+          >
+            <div className="flex items-center gap-5">
+              <CustomButton
+                isModal={true}
+                htmlFor="customModal"
+                theme="primary"
+              >
+                Cancel
+              </CustomButton>
+              <CustomButton onClick={Formik.handleSubmit} theme="primary">
+                Confirm
+              </CustomButton>
+            </div>
+          </Modal>
+        )}
       </div>
     </div>
   );

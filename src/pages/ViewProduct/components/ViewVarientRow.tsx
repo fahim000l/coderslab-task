@@ -2,7 +2,7 @@ import { varientType } from "../../../../utils/typs";
 
 const ViewVarientRow = ({ variant }: { variant: varientType }) => {
   return (
-    <div className="flex items-center justify-between gap-5">
+    <div className="flex items-start justify-between gap-5">
       <p className="text-start w-full">
         <span className="font-semibold">Color :</span>{" "}
         <span>{variant?.color}</span>

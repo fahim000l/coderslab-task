@@ -97,7 +97,7 @@ const ProductsTableRow = ({ product, index }: props) => {
               <CustomButton theme="primary">Manage</CustomButton>
               <ul
                 tabIndex={0}
-                className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 gap-2"
+                className="dropdown-content rounded-sm border border-solid border-gray-500 bg-[#f1f1f1]  menu p-2 shadow  min-w-52 gap-2 z-[900]"
               >
                 <li onClick={() => navigate(`/view-product/${id}`)}>
                   <CustomButton icon={<EyeIcon />} theme="primary">
