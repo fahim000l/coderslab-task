@@ -6,6 +6,8 @@ import { orderType } from "../../../../utils/typs";
 import EditIcon from "../../../tools/Icons/EditIcon";
 import TrushIcon from "../../../tools/Icons/TrushIcon";
 import formatDate from "../../../../utils/format";
+import { useDispatch } from "react-redux";
+import { setDeletingOrderId } from "../../../features/orders/ordersSlice";
 
 interface props {
   order: orderType;
@@ -16,6 +18,7 @@ const OrderTableRow = ({ order, index }: props) => {
   const navigate = useNavigate();
 
   const { id, name, email, address, total_quantity, created_at } = order;
+  const dispatch = useDispatch();
 
   return (
     <tr>
@@ -80,14 +83,19 @@ const OrderTableRow = ({ order, index }: props) => {
                 View
               </CustomButton>
             </li>
-            <li>
-              <CustomButton icon={<EditIcon />} theme="primary">
+            {/* <li>
+              <CustomButton
+                onClick={() => navigate(`/edit-order/select-product/${id}`)}
+                icon={<EditIcon />}
+                theme="primary"
+              >
                 Edit
               </CustomButton>
-            </li>
+            </li> */}
             <li>
               <CustomButton
                 icon={<TrushIcon />}
+                onClick={() => dispatch(setDeletingOrderId(id))}
                 theme="error"
                 isModal={true}
                 htmlFor="customModal"

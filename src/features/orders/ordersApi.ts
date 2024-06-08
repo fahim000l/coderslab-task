@@ -14,6 +14,7 @@ export const ordersApi = apiSlice.injectEndpoints({
       }) => ({
         url: `/api/orders?search=${search}&per_page=${per_page}&page=${page}`,
       }),
+      providesTags: ["orders"],
     }),
     createOrder: builder.mutation({
       query: (order) => ({
@@ -25,12 +26,21 @@ export const ordersApi = apiSlice.injectEndpoints({
         },
         body: order,
       }),
+      invalidatesTags: ["orders"],
     }),
     getOrderById: builder.query({
       query: (id) => ({
         url: `/api/orders/${id}`,
         params: id,
       }),
+      providesTags: ["orders"],
+    }),
+    deleteOrder: builder.mutation({
+      query: (orderId) => ({
+        url: `/api/orders/${orderId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["orders"],
     }),
   }),
 });
@@ -39,4 +49,5 @@ export const {
   useGetOrdersQuery,
   useCreateOrderMutation,
   useGetOrderByIdQuery,
+  useDeleteOrderMutation,
 } = ordersApi;

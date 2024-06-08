@@ -14,6 +14,7 @@ interface initialStateType {
     | never[];
   totalQuantity: number;
   orderedProducts: number[] | never[];
+  deletingOrderId: number | null;
 }
 
 const initialState: initialStateType = {
@@ -26,6 +27,7 @@ const initialState: initialStateType = {
   selectedVariants: [],
   totalQuantity: 0,
   orderedProducts: [],
+  deletingOrderId: null,
 };
 
 const orderSlice = createSlice({
@@ -41,13 +43,15 @@ const orderSlice = createSlice({
     },
     selectProduct: (
       state,
-      { payload }: { payload: { name: string; id: number } }
+      { payload }: { payload: { name: string; id: number; isEffect?: boolean } }
     ) => {
-      if (
-        (state?.selectedProducts as { name: string; id: number }[])?.some(
-          (product) => product?.id === payload?.id
-        )
-      ) {
+      const isExist = (
+        state?.selectedProducts as { name: string; id: number }[]
+      )?.some((product) => product?.id === payload?.id);
+
+      // if (!payload?.isEffect) {
+      console.log(isExist);
+      if (isExist) {
         state.selectedProducts = state.selectedProducts.filter(
           (product) => product?.id !== payload?.id
         );
@@ -56,6 +60,16 @@ const orderSlice = createSlice({
           payload
         );
       }
+      // } else {
+      //   console.log(isExist);
+      //   if (!isExist) {
+      //     (state.selectedProducts as { name: string; id: number }[]).push(
+      //       payload
+      //     );
+      //   }
+      // }
+
+      // (state.selectedProducts as { name: string; id: number }[]).push(payload);
     },
     chooseProduct: (state, { payload }) => {
       state.choosedProduct = payload;
@@ -134,6 +148,9 @@ const orderSlice = createSlice({
     resetOrderedProducts: (state) => {
       state.orderedProducts = [];
     },
+    setDeletingOrderId: (state, { payload }) => {
+      state.deletingOrderId = payload;
+    },
   },
 });
 
@@ -150,6 +167,7 @@ export const {
   resetOrder,
   setOrderdProducts,
   resetOrderedProducts,
+  setDeletingOrderId,
 } = orderSlice.actions;
 
 export default orderSlice.reducer;

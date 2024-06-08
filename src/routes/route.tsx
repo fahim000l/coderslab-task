@@ -39,6 +39,10 @@ const router = createBrowserRouter([
         element: <SelectProduct />,
       },
       {
+        path: "/edit-order/select-product/:id",
+        element: <SelectProduct />,
+      },
+      {
         path: "/create-order/select-variant",
         element: <SelectVariant />,
       },

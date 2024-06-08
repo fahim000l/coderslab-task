@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CustomButton from "../../../tools/CustomButton";
-import { productType } from "../../../../utils/typs";
+import { orderDatailsType, productType } from "../../../../utils/typs";
 import formatDate from "../../../../utils/format";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGetProductByIdQuery } from "../../../features/products/productsApi";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -13,7 +13,11 @@ import TrushIcon from "../../../tools/Icons/TrushIcon";
 import EditIcon from "../../../tools/Icons/EditIcon";
 import EyeIcon from "../../../tools/Icons/EyeIcon";
 import { rootStateType } from "../../../app/store";
-import { selectProduct } from "../../../features/orders/ordersSlice";
+import {
+  chooseProduct,
+  selectProduct,
+} from "../../../features/orders/ordersSlice";
+import { useGetOrderByIdQuery } from "../../../features/orders/ordersApi";
 
 interface props {
   product: productType;
@@ -29,6 +33,35 @@ const ProductsTableRow = ({ product, index }: props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { data } = useGetProductByIdQuery(id);
+
+  // const { id: orderId } = useParams();
+
+  // const { data: orderData } = useGetOrderByIdQuery(orderId);
+
+  // useEffect(() => {
+  //   console.log(orderData);
+  //   // const orderProducts?.
+  //   orderData?.data?.details?.forEach((detail: orderDatailsType) => {
+  //     console.log(detail?.variant?.product_id);
+  //     console.log(id);
+  //     if (detail?.variant?.product_id === id) {
+  //       if (
+  //         !selectedProducts?.find(
+  //           (product) => product?.id === detail?.variant?.product_id
+  //         )
+  //       ) {
+  //         dispatch(
+  //           selectProduct({
+  //             id: detail?.variant?.product_id as number,
+  //             name: name,
+  //             isEffect: true,
+  //           })
+  //         );
+  //       }
+  //     }
+  //   });
+  //   console.log(selectedProducts);
+  // }, [orderData]);
 
   return (
     <tr>

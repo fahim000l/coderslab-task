@@ -30,6 +30,8 @@ const CustomButton = ({
         } ${
           theme === "error" &&
           "border-red-700 text-white bg-red-400 hover:bg-red-700"
+        } ${
+          theme === "secondary" && "bg-gray-700 text-white hover:bg-gray-800"
         } px-5 py-1 rounded-sm ${className} flex justify-between items-center`}
       >
         {children}
@@ -46,6 +48,8 @@ const CustomButton = ({
         } ${
           theme === "error" &&
           "border-red-700 text-white bg-red-400 hover:bg-red-700"
+        } ${
+          theme === "secondary" && "bg-gray-700 text-white hover:bg-gray-800"
         } px-5 py-1 rounded-sm ${className} flex justify-between items-center`}
       >
         {children}

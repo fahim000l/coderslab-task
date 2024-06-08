@@ -15,6 +15,7 @@ export const productsAPi = apiSlice.injectEndpoints({
         url: `/api/products?search=${search}&per_page=${per_page}&page=${page}`,
         // mode: "no-cors",
       }),
+      providesTags: ["products"],
     }),
     createProduct: builder.mutation({
       query: (values) => ({
@@ -26,12 +27,14 @@ export const productsAPi = apiSlice.injectEndpoints({
         },
         body: values,
       }),
+      invalidatesTags: ["products"],
     }),
     getProductById: builder.query({
       query: (id) => ({
         url: `/api/products/${id}`,
         params: id,
       }),
+      providesTags: ["products"],
     }),
     editProduct: builder.mutation({
       query: (values) => ({
@@ -43,12 +46,14 @@ export const productsAPi = apiSlice.injectEndpoints({
         },
         body: values?.product,
       }),
+      invalidatesTags: ["products"],
     }),
     deleteProduct: builder.mutation({
       query: (productId) => ({
         url: `/api/products/${productId}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["products"],
     }),
   }),
   //   overrideExisting: false,

@@ -5,5 +5,6 @@ export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://reactjr.coderslab.online",
   }),
+  tagTypes: ["products", "orders"],
   endpoints: (builder) => ({}),
 });

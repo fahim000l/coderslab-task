@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { resetOrderedProducts } from "../features/orders/ordersSlice";
+import CustomButton from "../tools/CustomButton";
 
 const Main = () => {
   const { pathname } = useLocation();
@@ -35,13 +36,21 @@ const Main = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu p-4 w-40 min-h-full bg-base-200 text-base-content">
+        <ul className="p-4 w-40 min-h-full bg-base-200 text-base-content flex flex-col gap-2">
           {/* Sidebar content here */}
           <li>
-            <Link to={"/"}>Products</Link>
+            <Link to={"/"}>
+              <CustomButton className="w-full" theme="secondary">
+                Products
+              </CustomButton>
+            </Link>
           </li>
           <li>
-            <Link to={"/orders"}>Orders</Link>
+            <Link to={"/orders"}>
+              <CustomButton className="w-full" theme="secondary">
+                Orders
+              </CustomButton>
+            </Link>
           </li>
         </ul>
       </div>
