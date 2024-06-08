@@ -6,5 +6,5 @@ export const apiSlice = createApi({
     baseUrl: "https://reactjr.coderslab.online",
   }),
   tagTypes: ["products", "orders"],
-  endpoints: (builder) => ({}),
+  endpoints: () => ({}),
 });

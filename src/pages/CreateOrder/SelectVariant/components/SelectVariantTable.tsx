@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import SelectVariantTableRow from "./SelectVariantTableRow";
 import { useSelector } from "react-redux";
 import { rootStateType } from "../../../../app/store";

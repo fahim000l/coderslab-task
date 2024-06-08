@@ -1,4 +1,3 @@
-import React from "react";
 import CustomButton from "../../../tools/CustomButton";
 import CustomInput from "../../../tools/CustomInput";
 import SearchIcon from "../../../tools/Icons/SearchIcon";

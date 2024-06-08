@@ -1,5 +1,4 @@
 import React from "react";
-import SearchIcon from "./Icons/SearchIcon";
 
 interface props {
   isReversed?: boolean;

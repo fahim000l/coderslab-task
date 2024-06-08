@@ -42,7 +42,10 @@ const VarientRow = ({ Formik, index }: props) => {
         onClick={() => {
           let copy = [...(Formik.values.variants as varientType[])];
           console.log(copy);
-          copy = copy?.filter((varient, i) => i !== index);
+          copy = copy?.filter((varient, i) => {
+            console.log(varient);
+            return i !== index;
+          });
           console.log(copy);
           Formik.setFieldValue("variants", copy);
         }}

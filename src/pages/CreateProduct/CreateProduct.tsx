@@ -152,9 +152,10 @@ const CreateProduct = () => {
       <div>
         <p className="text-center text-lg font-semibold mb-5">Varients</p>
         <div className="flex flex-col gap-5">
-          {Formik?.values?.variants?.map((varient, i) => (
-            <VarientRow Formik={Formik} key={i} index={i} />
-          ))}
+          {Formik?.values?.variants?.map((varient, i) => {
+            console.log(varient);
+            return <VarientRow Formik={Formik} key={i} index={i} />;
+          })}
         </div>
         <CustomButton
           theme="primary"
