@@ -7,6 +7,7 @@ interface props {
   type?: string;
   placeholder?: string;
   onChange?: (e: any) => void;
+  onBlur?: ((e: any) => void) | (() => void);
   className?: string;
   value?: string;
 }
@@ -17,6 +18,7 @@ const CustomInput = ({
   type,
   placeholder,
   onChange,
+  onBlur,
   className,
   value,
 }: props) => {
@@ -31,6 +33,7 @@ const CustomInput = ({
         type={type}
         placeholder={placeholder}
         onChange={onChange}
+        onBlur={onBlur}
         value={value}
       />
       {icon}

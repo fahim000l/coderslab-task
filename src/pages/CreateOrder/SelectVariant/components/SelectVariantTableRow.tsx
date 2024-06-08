@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { varientType } from "../../../../../utils/typs";
 import CustomInput from "../../../../tools/CustomInput";
 import { useDispatch, useSelector } from "react-redux";
-import { selectVariant } from "../../../../features/orders/ordersSlice";
+import {
+  confirmVariant,
+  selectVariant,
+} from "../../../../features/orders/ordersSlice";
 import { rootStateType } from "../../../../app/store";
+import toast from "react-hot-toast";
 
 interface props {
   index: number;
@@ -81,6 +85,16 @@ const SelectVariantTableRow = ({ index, variant }: props) => {
             setQuantity(parseInt(e?.target?.value));
             // }
           }}
+          onBlur={() => {
+            dispatch(
+              selectVariant({
+                quantity: quantity as number,
+                variant_id: id as number,
+                check: false,
+              })
+            );
+            setQuantity(undefined);
+          }}
           placeholder="Quantity"
           className="w-[100px] mx-auto"
         />
@@ -92,16 +106,21 @@ const SelectVariantTableRow = ({ index, variant }: props) => {
       >
         <input
           onClick={() => {
-            dispatch(
-              selectVariant({
-                quantity: quantity as number,
-                variant_id: id as number,
-              })
-            );
-            setQuantity(undefined);
+            if (
+              selectedVariants?.find((variant) => variant?.variant_id === id)
+                ?.quantity
+            ) {
+              dispatch(
+                confirmVariant({
+                  variant_id: id as number,
+                })
+              );
+            } else {
+              toast.error("Please specify quantity, to select the variant");
+            }
           }}
           checked={selectedVariants?.some(
-            (variant) => variant?.variant_id === id
+            (variant) => variant?.variant_id === id && variant.check === true
           )}
           type="checkbox"
           className="checkbox"

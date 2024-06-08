@@ -9,7 +9,9 @@ interface initialStateType {
   per_page: number;
   selectedProducts: { name: string; id: number }[] | never[];
   choosedProduct: { name: string; id: number } | null;
-  selectedVariants: { variant_id: number; quantity: number }[] | never[];
+  selectedVariants:
+    | { variant_id: number; quantity: number; check: boolean }[]
+    | never[];
 }
 
 const initialState: initialStateType = {
@@ -56,11 +58,17 @@ const orderSlice = createSlice({
     },
     selectVariant: (
       state,
-      { payload }: { payload: { variant_id: number; quantity: number } }
+      {
+        payload,
+      }: { payload: { variant_id: number; quantity: number; check: boolean } }
     ) => {
       if (
         (
-          state?.selectedVariants as { variant_id: number; quantity: number }[]
+          state?.selectedVariants as {
+            variant_id: number;
+            quantity: number;
+            check: boolean;
+          }[]
         )?.some((variant) => variant.variant_id === payload?.variant_id)
       ) {
         state.selectedVariants = state?.selectedVariants?.filter(
@@ -69,12 +77,28 @@ const orderSlice = createSlice({
       } else {
         if (payload.quantity) {
           (
-            state.selectedVariants as { variant_id: number; quantity: number }[]
+            state.selectedVariants as {
+              variant_id: number;
+              quantity: number;
+              check: boolean;
+            }[]
           ).push(payload);
         } else {
           toast.error("Please specify quantity, to select the variant");
         }
       }
+    },
+    confirmVariant: (
+      state,
+      { payload }: { payload: { variant_id: number } }
+    ) => {
+      (
+        state.selectedVariants.find(
+          (variant) => variant.variant_id === payload.variant_id
+        ) as { variant_id: number; quantity: number; check: boolean }
+      ).check = !state.selectedVariants?.find(
+        (variant) => variant?.variant_id === payload?.variant_id
+      )?.check;
     },
   },
 });
@@ -85,6 +109,7 @@ export const {
   selectProduct,
   chooseProduct,
   selectVariant,
+  confirmVariant,
 } = orderSlice.actions;
 
 export default orderSlice.reducer;

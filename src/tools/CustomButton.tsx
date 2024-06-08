@@ -8,6 +8,7 @@ interface props {
   htmlFor?: string;
   icon?: React.ReactNode;
   theme?: "primary" | "secondary" | "error";
+  ref?: HTMLButtonElement | HTMLLabelElement;
 }
 
 const CustomButton = ({
@@ -18,12 +19,14 @@ const CustomButton = ({
   htmlFor,
   icon,
   theme,
+  ref,
 }: props) => {
   if (isModal) {
     return (
       <label
         htmlFor={htmlFor}
         onClick={onClick}
+        ref={ref}
         className={`border border-solid ${
           theme === "primary" &&
           "border-blue-700 bg-blue-400 text-white hover:bg-[steelblue]"
@@ -39,6 +42,7 @@ const CustomButton = ({
   } else {
     return (
       <button
+        ref={ref}
         onClick={onClick}
         className={`border border-solid ${
           theme === "primary" &&
