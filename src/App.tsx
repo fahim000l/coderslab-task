@@ -1,14 +1,6 @@
-import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
-import { useGetProducts } from "./hooks/useGetProducts";
-import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "./features/products/productsSlice";
 import { RouterProvider } from "react-router-dom";
 import router from "./routes/route";
-import { rootStateType } from "./app/store";
-import { useGetProductsQuery } from "./features/products/productsApi";
 
 function App() {
   // const dispatch = useDispatch();

@@ -37,11 +37,11 @@ const CreateProduct = () => {
     console.log(editProductResult);
 
     if (editProductResult.isSuccess) {
-      toast.success(editProductResult?.data?.message);
+      toast.success("Product updated successfully");
       navigate("/");
     }
     if (editProductResult?.isError) {
-      toast.error(editProductResult?.error?.data?.message);
+      toast.error("Something went wrong!");
     }
   }, [editProductResult]);
 
@@ -49,11 +49,11 @@ const CreateProduct = () => {
     console.log(productStoreResult);
 
     if (productStoreResult?.isSuccess) {
-      toast.success(productStoreResult?.data?.message);
+      toast.success("Product created successfully");
       navigate("/");
     }
     if (productStoreResult?.isError) {
-      toast.error(productStoreResult?.error?.data?.message);
+      toast.error("Something went wrong!");
     }
   }, [productStoreResult]);
 
