@@ -1,17 +1,25 @@
 import React, { useEffect, useState } from "react";
 import ViewOrderDetailsTableRow from "./ViewOrderDetailsTableRow";
-import {
-  orderDatailsType,
-  orderType,
-  productType,
-} from "../../../../utils/typs";
-import { useGetProductByIdQuery } from "../../../features/products/productsApi";
-
+import { orderDatailsType, orderType } from "../../../../utils/typs";
+import { useDispatch, useSelector } from "react-redux";
+import { setOrderdProducts } from "../../../features/orders/ordersSlice";
+import { rootStateType } from "../../../app/store";
 interface props {
   order: orderType;
 }
 
 const ViewOrderDetailsTable = ({ order }: props) => {
+  console.log(order);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    order?.details?.forEach((detail) => {
+      dispatch(setOrderdProducts(detail?.variant?.product_id as number));
+    });
+  }, [order]);
+  const { orderedProducts } = useSelector(
+    (state: rootStateType) => state.orders
+  );
+
   return (
     <div className="h-[500px] overflow-y-scroll">
       <table
@@ -55,8 +63,13 @@ const ViewOrderDetailsTable = ({ order }: props) => {
           </tr>
         </thead>
         <tbody>
-          {order?.details?.map((detail: orderDatailsType, i: number) => (
-            <ViewOrderDetailsTableRow detail={detail} index={1} />
+          {orderedProducts?.map((id: number, i: number) => (
+            <ViewOrderDetailsTableRow
+              productId={id}
+              details={order?.details}
+              index={i}
+              key={i}
+            />
           ))}
         </tbody>
       </table>

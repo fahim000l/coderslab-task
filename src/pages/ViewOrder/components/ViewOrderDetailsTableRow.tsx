@@ -11,13 +11,15 @@ import ViewVariantsTable from "./ViewVariantsTable";
 
 interface params {
   index: number;
-  detail: orderDatailsType;
+  details: orderDatailsType[];
+  productId: number;
 }
 
-const ViewOrderDetailsTableRow = ({ index, detail }: params) => {
-  console.log(detail);
+const ViewOrderDetailsTableRow = ({ index, details, productId }: params) => {
+  console.log(details);
   const [product, setProduct] = useState<productType | null>(null);
-  const { data } = useGetProductByIdQuery(detail?.variant?.product_id);
+  //   const [variants, setVariants] = useState<varientType[] | never[]>([]);
+  const { data } = useGetProductByIdQuery(productId);
 
   useEffect(() => {
     console.log(data);
@@ -25,6 +27,19 @@ const ViewOrderDetailsTableRow = ({ index, detail }: params) => {
       setProduct(data?.data);
     }
   }, [data]);
+
+  //   useEffect(() => {
+  //     details?.forEach((detail) =>
+  //       setVariants([...variants, detail?.variant as varientType])
+  //     );
+
+  //   }, [details]);
+
+  const variants = details?.filter(
+    (detail) => detail.variant?.product_id === product?.id
+  );
+
+  console.log(variants);
 
   return (
     <tr>
@@ -76,9 +91,10 @@ const ViewOrderDetailsTableRow = ({ index, detail }: params) => {
         </CustomButton>
         <ContentModal>
           <ViewVariantsTable
-            variant={detail.variant as varientType}
+            variants={variants as orderDatailsType[]}
             product={product as productType}
           />
+          {/* Variant Container */}
         </ContentModal>
       </td>
     </tr>

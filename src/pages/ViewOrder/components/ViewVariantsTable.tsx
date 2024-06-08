@@ -1,25 +1,42 @@
 import React from "react";
 import VIewVariantsTableRow from "./VIewVariantsTableRow";
-import { productType, varientType } from "../../../../utils/typs";
+import {
+  orderDatailsType,
+  productType,
+  varientType,
+} from "../../../../utils/typs";
+import CustomButton from "../../../tools/CustomButton";
+import BackIcon from "../../../tools/Icons/BackIcon";
 
 interface props {
-  variant: varientType;
+  variants: varientType[] | orderDatailsType[];
   product: productType;
 }
 
-const ViewVariantsTable = ({ variant, product }: props) => {
-  console.log(variant);
+const ViewVariantsTable = ({ variants, product }: props) => {
+  console.log(variants);
   return (
     <div>
-      <div className="mb-5">
-        <p className="flex items-center gap-2 text-sm">
-          <span className="font-semibold">Product Id :</span>
-          <span>{product?.id}</span>
-        </p>
-        <p className="flex items-center gap-2 text-sm">
-          <span className="font-semibold">Product Name :</span>
-          <span>{product?.name}</span>
-        </p>
+      <div className="flex items-start justify-between mb-5">
+        <div>
+          <p className="flex items-center gap-2 text-sm">
+            <span className="font-semibold">Product Id :</span>
+            <span>{product?.id}</span>
+          </p>
+          <p className="flex items-center gap-2 text-sm">
+            <span className="font-semibold">Product Name :</span>
+            <span>{product?.name}</span>
+          </p>
+        </div>
+        <CustomButton
+          className="min-w-[140px]"
+          theme="primary"
+          isModal={true}
+          htmlFor="contentModal"
+          icon={<BackIcon />}
+        >
+          Back
+        </CustomButton>
       </div>
       <div className="h-[500px] overflow-y-scroll">
         <table
@@ -46,7 +63,7 @@ const ViewVariantsTable = ({ variant, product }: props) => {
                 scope="col"
                 className="bg-[#0f9ed5] text-center text-white py-2 border border-solid border-[white] text-[14px]"
               >
-                SP
+                Specification
               </th>
               <th
                 scope="col"
@@ -57,7 +74,12 @@ const ViewVariantsTable = ({ variant, product }: props) => {
             </tr>
           </thead>
           <tbody>
-            <VIewVariantsTableRow index={1} />
+            {variants?.map((variant) => (
+              <VIewVariantsTableRow
+                variant={variant as orderDatailsType}
+                index={1}
+              />
+            ))}
           </tbody>
         </table>
       </div>

@@ -1,10 +1,18 @@
 import React from "react";
+import {
+  orderDatailsType,
+  orderType,
+  varientType,
+} from "../../../../utils/typs";
 
 interface props {
   index: number;
+  variant: orderDatailsType;
 }
 
-const VIewVariantsTableRow = ({ index }: props) => {
+const VIewVariantsTableRow = ({ index, variant }: props) => {
+  const { variant: varientRow } = variant;
+
   return (
     <tr>
       <td
@@ -13,7 +21,7 @@ const VIewVariantsTableRow = ({ index }: props) => {
         } py-2 border border-solid border-[white] text-[12px]`}
       >
         {/* {id} */}
-        ID
+        {varientRow?.id}
       </td>
       <td
         className={`text-center ${
@@ -21,7 +29,7 @@ const VIewVariantsTableRow = ({ index }: props) => {
         } py-2 border border-solid border-[white] text-[12px]`}
       >
         {/* {id} */}
-        Color
+        {varientRow?.color}
       </td>
       <td
         className={`text-center ${
@@ -29,7 +37,21 @@ const VIewVariantsTableRow = ({ index }: props) => {
         } py-2 border border-solid border-[white] text-[12px]`}
       >
         {/* {id} */}
-        SP
+        {varientRow?.specification && varientRow?.specification?.length > 20 ? (
+          <div className="dropdown">
+            <div tabIndex={0} role="button">
+              {varientRow?.specification?.slice(0, 20) + "..."}
+            </div>
+            <div
+              tabIndex={0}
+              className="dropdown-content rounded-sm border border-solid border-gray-500 bg-[#f1f1f1] menu p-2 shadow  min-w-52 gap-2 z-[900] text-start"
+            >
+              {varientRow?.specification}
+            </div>
+          </div>
+        ) : (
+          varientRow?.specification
+        )}
       </td>
       <td
         className={`text-center ${
@@ -37,7 +59,7 @@ const VIewVariantsTableRow = ({ index }: props) => {
         } py-2 border border-solid border-[white] text-[12px]`}
       >
         {/* {id} */}
-        Size
+        {varientRow?.size}
       </td>
     </tr>
   );

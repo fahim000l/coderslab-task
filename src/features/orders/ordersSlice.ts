@@ -13,6 +13,7 @@ interface initialStateType {
     | { variant_id: number; quantity: number; check: boolean }[]
     | never[];
   totalQuantity: number;
+  orderedProducts: number[] | never[];
 }
 
 const initialState: initialStateType = {
@@ -24,6 +25,7 @@ const initialState: initialStateType = {
   choosedProduct: null,
   selectedVariants: [],
   totalQuantity: 0,
+  orderedProducts: [],
 };
 
 const orderSlice = createSlice({
@@ -124,6 +126,14 @@ const orderSlice = createSlice({
       state.selectedVariants = [];
       state.totalQuantity = 0;
     },
+    setOrderdProducts: (state, { payload }: { payload: number }) => {
+      if (!(state.orderedProducts as number[])?.includes(payload)) {
+        (state.orderedProducts as number[]).push(payload);
+      }
+    },
+    resetOrderedProducts: (state) => {
+      state.orderedProducts = [];
+    },
   },
 });
 
@@ -138,6 +148,8 @@ export const {
   removePendingVariants,
   resetTotalQuantity,
   resetOrder,
+  setOrderdProducts,
+  resetOrderedProducts,
 } = orderSlice.actions;
 
 export default orderSlice.reducer;
