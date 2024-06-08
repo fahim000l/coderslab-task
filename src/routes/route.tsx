@@ -5,6 +5,7 @@ import Orders from "../pages/Orders/Orders";
 import CreateProduct from "../pages/CreateProduct/CreateProduct";
 import ViewProduct from "../pages/ViewProduct/ViewProduct";
 import SelectProduct from "../pages/CreateOrder/SelectProduct/SelectProduct";
+import SelectVariant from "../pages/CreateOrder/SelectVariant/SelectVariant";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "/create-order/select-product",
         element: <SelectProduct />,
+      },
+      {
+        path: "/create-order/select-variant",
+        element: <SelectVariant />,
       },
     ],
   },

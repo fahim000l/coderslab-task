@@ -18,6 +18,10 @@ const Products = () => {
     (state: rootStateType) => state?.products
   );
   const { pageTitle } = useSelector((state: rootStateType) => state?.main);
+  const { selectedProducts } = useSelector(
+    (state: rootStateType) => state?.orders
+  );
+
   const navigate = useNavigate();
   const [deleteProduct, deleteProductResult] = useDeleteProductMutation();
   const dispatch = useDispatch();
@@ -48,7 +52,18 @@ const Products = () => {
             <CustomButton theme="error" onClick={() => navigate("/orders")}>
               Cancel
             </CustomButton>
-            <CustomButton theme="primary">Next</CustomButton>
+            <CustomButton
+              onClick={() => {
+                if (selectedProducts?.length === 0) {
+                  toast?.error("You haven't selected any product");
+                } else {
+                  navigate("/create-order/select-variant");
+                }
+              }}
+              theme="primary"
+            >
+              Next
+            </CustomButton>
           </div>
         )}
       </div>

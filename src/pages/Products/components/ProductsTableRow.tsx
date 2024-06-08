@@ -67,8 +67,10 @@ const ProductsTableRow = ({ product, index }: props) => {
           } py-2 border border-solid border-[white] text-[12px]`}
         >
           <input
-            onClick={() => dispatch(selectProduct(id as number))}
-            checked={(selectedProducts as number[])?.includes(id as number)}
+            onClick={() => dispatch(selectProduct({ id: id as number, name }))}
+            checked={selectedProducts?.some(
+              (product) => product?.id === (id as number)
+            )}
             type="checkbox"
             defaultChecked
             className="checkbox"

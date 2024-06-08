@@ -1,7 +1,11 @@
 export interface varientType {
+  id?: number;
   color: string;
   specification: string;
   size: string;
+  product_id?: number;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface productType {
